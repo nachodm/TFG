@@ -189,7 +189,7 @@ app.get("/examen", (request, response) => {
                         }
                     })
                 } else{
-                    response.redirect("PerfilExamen");
+                    response.render("hall", {students:request.session.students, aula: undefined, full: request.session.full, finished: request.session.finished});                 
                 }
             }
         })
