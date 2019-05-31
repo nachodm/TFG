@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Universidad Complutense de Madrid</title>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Custom styles -->
+        <link href="css/aula.css" rel="stylesheet">
+        <link href="css/seatchart.css"  rel="stylesheet">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"> 
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+    </head>
+    <body>
+        <a id="button"></a>
+        
+        <nav class="navbar navbar-expand-md navbar-dark p-3">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a id="navdropdown" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-bars"></i> Menú</a>
+                        <div class="dropdown-menu" aria-labelledby="navdropdown">
+                            <a class="dropdown-item" href="/PerfilExamen">Perfil</a>
+                            <a class="active dropdown-item" href="/Examen">Aula</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand" href="#">
+                    <img src="https://www.sinnaps.com/wp-content/uploads/2016/10/UCM-Alternativa-color.png" alt="Logo Universidad Complutense">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/destroy">Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <% if(aula===undefined){%>
+            <div class="container text-center center p-3">
+                <div class="alert alert-warning" role="alert" >
+                    <h4 class="alert-heading"><strong>¡Error!</strong></h4>
+                    <p>No hay programado ningún examen a esta hora que tengas que supervisar</p>
+                    <hr>
+                    <p class="mb-0">Para más información contacte con el administrador.</p>
+                </div>
+            </div>
+        <%}else{%>
+            <div class="container my-3">
+                <div id="seatMapDiv" class="p-2 col-xs-12 seating-chart block-center">
+                    <h5 class='text-center mb-1'>AULA <%=aula.id_aula%></h5>
+                    <h5 class="text-center"><small><%=aula.nombreA%></small></h5> 
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 h-100 border d-inline-block min-vh-50">
+                        <img src="img/Aula.png" class="img-fluid rounded mx-auto d-block" alt="Responsive image" max-width="100%" height="auto">
+
+                        <% if (full) {%>
+                            <div class="container text-center center mt-2 pt-2">
+                                <div class="alert alert-warning" role="alert" >
+                                    <h4 class="alert-heading"><strong>¡Advertencia!</strong></h4>
+                                    <p>El aula está llena o la simulación no contiene más alumnos</p>
+                                    <hr>
+                                    <p class="mb-0">Para más información contacte con el administrador.</p>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="col-8">
+                        <div style="overflow:scroll;height:60vh;width:100%;overflow:auto">
+                            <table class="table table-hover table-striped"> 
+                                <thead>
+                                    <tr>
+                                        <th>Puesto</th>
+                                        <th>Alumno</th>
+                                        <th>Modelo</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody id="students"max-width="100%" max-height="200px">
+                                    <% if (students.length > 0) {%>
+                                        <%students.forEach(student => { %>
+                                            <tr data-toggle="modal" data-id="<%=student.id%>" data-target="#orderModal" data-id="<%=student.id%>" data-nombre="<%=student.nombre%>" data-apellidos="<%=student.apellidos%>">
+                                                <td><%=student.puesto%></td>
+                                                <td><%=student.nombre%> <%=student.apellidos%></td>
+                                                <td><%=student.ruta%></td>
+                                            </tr>
+                                        <%});%>
+                                    <% } %>   
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="orderModalLabel">Puesto 13</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-4">
+                                                <div class="container">
+                                                    <img src="https://image.flaticon.com/icons/svg/21/21104.svg" alt="user image"> 
+                                                </div>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="row name">Nombre</div>
+                                                <div class="row surname">Apellidos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="mr-auto">
+                                            <form action="/handExam" method="POST">
+                                                <input name="hand" class="hid" type="hidden" value="0">
+                                                <button type="submit" class="btn btn-success">Entregar</button>
+                                            </form>
+                                        </div>
+                                        <form action="/sendWarning" method="POST">
+                                            <input name="warn"  class="hid" type="hidden" value="0">
+                                            <button type="submit" class="btn btn-danger">Notificar posible copia</button>
+                                        </form>
+                                        <form action="/finalize" method="POST">
+                                            <input name="fin"  class="hid" type="hidden" value="0">
+                                            <button type="submit" class="btn btn-primary">Finalizar</button>
+                                        </form>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> 
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="page-footer font-small blue fixed-bottom p-3">
+                <div class="container-fluid text-center">
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0">Estudiantes en curso: <span class="total-number" id="ongoing"></span></div>
+                        <hr class="clearfix w-100 d-md-none pb-3">
+                        <div class="col-md-6 mt-md-0">Exámenes entregados: <span class="total-number" id="finished"><%=finished%></span></div>
+                    </div>
+                </div>
+            </footer>
+        <%}%>
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- Custom JavaScript -->
+        <script type="text/javascript" src="js/backtotop.js"></script>
+        <script type="text/javascript" src="js/modal.js"></script>
+        <script>
+            var rowCount = $('#students tr').length;
+            $( "#ongoing" ).append(rowCount);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>ERROR</title>
+        <meta charset="UTF-8">
+        
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Roboto);
+            html { 
+                background:  url(https://66.media.tumblr.com/546c0cd48d71f210f9b67a389003790d/tumblr_neq0yw9rMA1tm16jjo1_500.gif) no-repeat center center fixed; 
+                background-size: cover;
+                font-family: 'Roboto', sans-serif;
+            }
+            h1{
+                font-size: 16em;
+                margin: .2em .5em;
+                color: #b71234;
+                margin-bottom:0px;
+            }
+            h2 {
+                margin-left: 10%;
+                color: whitesmoke}
+            a {
+                color: whitesmoke;
+                text-decoration: underline;
+            }
+            a:hover {
+                color: #b71234;
+            }
+        </style>
+    </head>
+    <body>         
+        <h1>Error <%=error%></h1>         
+        <h2>La dirección <code><%= url %></code> no existe</h2>
+        <h2><a href="/login">Volver a la página principal</a></h2>    
+    </body> 
+</html> 

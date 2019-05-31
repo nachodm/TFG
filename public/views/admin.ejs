@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css" type="text/css" charset="utf-8">
+        <style>
+            html, body{
+                margin:0px;
+                padding:0px;
+                height:100%;
+            }
+        </style>
+        <title>Universidad Complutense de Madrid</title>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Custom styles -->
+        <link href="css/useradmin.css" rel="stylesheet">
+        <link href="css/aula.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+
+        <script src="codebase/dhtmlxscheduler.js"></script>
+        <script src="https://export.dhtmlx.com/scheduler/api.js"></script>  
+        <script src="codebase/sources/locale/locale_es.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <a id="button"></a>
+        
+        <nav class="navbar navbar-expand-md navbar-dark p-3">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a id="navdropdown" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-bars"></i> Menú</a>
+                        <div class="dropdown-menu" aria-labelledby="navdropdown">
+                            <a class="active dropdown-item" href="#">Gestionar Calendario</a>
+                            <a class="dropdown-item" href="/adminusers">Gestionar Usuarios</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand" href="#">
+                    <img src="https://www.sinnaps.com/wp-content/uploads/2016/10/UCM-Alternativa-color.png" alt="Logo Universidad Complutense">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/destroy">Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Listado aulas</span>
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 1 <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="book-open"></span>
+                                    AULA 2
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 3
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 4
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 5
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 6
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 7
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="book-open"></span>
+                                AULA 8
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="monitor"></span>
+                                LAB. 1
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="monitor"></span>
+                                LAB. 2
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="monitor"></span>
+                                LAB. 3
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span data-feather="monitor"></span>
+                                LAB. 4
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>    
+          
+                  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                      <h1 class="h2">Calendario</h1>
+                      <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <input class="btn btn-sm btn-outline-secondary" value="Exportar a PNG" type="button" onclick='scheduler.exportToPNG()'>
+                            <input class="btn btn-sm btn-outline-secondary" value="Exportar a PDF" type="button" onclick='scheduler.exportToPDF()'>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+                        <div class="dhx_cal_navline">
+                            <div class="dhx_cal_prev_button">&nbsp;</div>
+                            <div class="dhx_cal_next_button">&nbsp;</div>
+                            <div class="dhx_cal_today_button"></div>
+                            <div class="dhx_cal_date"></div>
+                            <div class="dhx_cal_tab" name="day_tab"></div>
+                            <div class="dhx_cal_tab" name="week_tab"></div>
+                            <div class="dhx_cal_tab" name="month_tab"></div>
+                        </div>
+                        <div class="dhx_cal_header"></div>
+                        <div class="dhx_cal_data"></div>
+                    </div>
+                  </main>
+            </div>
+        </div>
+        <script>
+            scheduler.config.xml_date="%Y-%m-%d %H:%i";
+            scheduler.init("scheduler_here", new Date(2019, 4, 20), "month");
+            scheduler.setLoadMode("day");
+
+            // load data from backend
+            scheduler.load("/events", "json");
+
+            // connect backend to scheduler
+            var dp = new dataProcessor("/events");
+            dp.init(scheduler);
+
+            // set data exchange mode
+            dp.setTransactionMode("REST");
+        </script>
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- Custom JavaScript -->
+        <script type="text/javascript" src="js/backtotop.js"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script>
+            feather.replace()
+        </script>
+    </body>
+</html>

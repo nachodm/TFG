@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Universidad Complutense de Madrid</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Custom styles -->
+        <link href="css/useradmin.css" rel="stylesheet">
+        <link href="css/aula.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/seatchart.css">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"> 
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+    </head>
+    <body>
+      <a id="button"></a>
+        
+      <nav class="navbar navbar-expand-md navbar-dark p-3">
+          <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item dropdown">
+                      <a id="navdropdown" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-bars"></i> Menú</a>
+                      <div class="dropdown-menu" aria-labelledby="navdropdown">
+                          <a class="dropdown-item" href="/admin">Gestionar Calendario</a>
+                          <a class="active dropdown-item" href="#">Gestionar Usuarios</a>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+          <div class="mx-auto order-0">
+              <a class="navbar-brand" href="#">
+                  <img src="https://www.sinnaps.com/wp-content/uploads/2016/10/UCM-Alternativa-color.png" alt="Logo Universidad Complutense">
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+          <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="/destroy">Salir</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+
+      <div class="container-fluid">
+          <div class="row">
+              <nav class="col-md-2 d-none d-md-block bg-light sidebar h-100">
+                <div class="sidebar-sticky">
+                  <ul class="nav flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">
+                        <span data-feather="home"></span>
+                        Inicio <span class="sr-only">(current)</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#manageCredentials">
+                            <span data-feather="shield"></span>
+                            Gestionar credenciales acceso
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#addUser">
+                        <span data-feather="folder-plus"></span>
+                        Añadir usuario
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#deleteUser">
+                        <span data-feather="folder-minus"></span>
+                        Borrar usuario
+                      </a>
+                    </li>
+                  </ul>
+      
+                  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Entregas exámenes</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                      <span data-feather="plus-circle"></span>
+                    </a>
+                  </h6>
+                  <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <span data-feather="file-text"></span>
+                        Cuatrimestre actual
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <span data-feather="file-text"></span>
+                        Años anteriores
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#managesupervisors">
+                          <span data-feather="file-text"></span>
+                          Gestionar supervisores de examenes
+                        </a>
+                      </li>
+                  </ul>
+                </div>
+              </nav>
+      
+              <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Inicio</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                      <button class="btn btn-sm btn-outline-secondary">Compartir</button>
+                      <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+                    </div>
+                  </div>
+                </div>
+                <h3>Usuarios</h3>
+                <div class="table-responsive" style="overflow:scroll;height:70vh;width:100%;overflow:auto">
+                  <table class="table table-striped table-sm">
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Rol</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if ((users !== null) && (users !== undefined)){%>
+                        <%users.forEach(user => { %>
+                          <tr>
+                              <td><%=user.id%></td>
+                              <td><%=user.nombre%></td>
+                              <td><%=user.apellidos%></td>
+                              <td><%=user.tipo%></td>
+                          </tr>
+                        <%});%>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="pt-3 pb-2 mb-3 border-bottom" id="manageCredentials">
+                  <h1 class="h2 border-bottom pb-2 mb-3">Gestionar credenciales acceso</h1>
+                  <form class="m-2 p-2" method="POST" action="/searchUser">
+                      <div class="container-fluid">
+                        <div class="input-group mb-3">
+                          <input name="search" id="search" type="text" class="form-control" placeholder="Buscar profesor por apellidos" required>
+                          <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                              Buscar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                  </form>
+                  <div class="table-responsive">
+                    <table class="table">
+                        <% if ((credentials !== null) && (credentials !== undefined)){%>
+                          <%credentials.forEach(credential => { %>
+                            <%if (credential.type !== 0) { %>
+                              <div class="container">
+                                  <div class="row border-top pt-3">
+                                    <form role="form" method="POST" action="/grantCredentials">
+                                        <div class="form-group col-xs-10 col-sm-5 col-md-5 col-lg-5">
+                                          <h5><%=credential.name%></h5>
+                                        </div>
+                                        <div class="form-group col-xs-10 col-sm-5 col-md-5 col-lg-5">
+                                          <h5><%=credential.surnames%></h5>
+                                        </div>
+                                        <div class="form-group col-xs-10 col-sm-5 col-md-5 col-lg-5">
+                                            <label for="username">Nombre de usuario</label>
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Introduzca un nombre único de identificación"required>
+                                        </div>
+                                        <div class="form-group col-xs-10 col-sm-5 col-md-5 col-lg-5">
+                                            <label for="newpass">Contraseña de acceso</label>
+                                            <input type="password" class="form-control" name="newpass" id="newpass" placeholder="Introduzca una contraseña"required>
+                                        </div>
+                                        <input type="hidden" name="idU" value="<%=credential.id%>">
+                                        <div class="clearfix"></div>
+                                        <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2">
+                                            <button type="submit" class="btn btn-outline-primary blue">Otorgar credenciales</button>
+                                        </div>
+                                    </form>
+                                  </div>
+                              </div>
+                            <% } %>
+                          <%});%>
+                        <% } %>
+                    </table>
+                  </div>
+                </div>
+                <div class="pt-3 pb-2 mb-3 border-bottom" id="addUser">
+                    <h1 class="h2 border-bottom pb-2 mb-3">Añadir usuario</h1>
+                    <form class="m-2 p-2" method="POST" action="/addUser">
+                        <div class="container-fluid">
+                          <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <label for="inputName">Nombre</label>
+                              <input type="text" class="form-control" id="inputName" placeholder="Nombre" name="nombre" required>
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <label for="inputSurnames">Apellidos</label>
+                              <input type="text" class="form-control" id="inputSurnames" placeholder="Apellidos" name="apellidos" required>
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <label for="inputType">Tipo</label>
+                              <input type="text" class="form-control" id="inputType" placeholder="0: Estudiantes, 1: Profesorado, 2: Administración" name="tipo" required>
+                            </div>
+                          </div>
+                          <% if (errAdd!==null && errAdd===true){%>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                El usuario ya existe. Inténtelo de nuevo.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                          <%}else if (errAdd===false){%>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                Usuario añadido correctamente
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div> 
+                          <%}%>
+                          
+                          <button class="btn btn-success" type="submit">
+                            Añadir
+                          </button>
+                        </div>
+                    </form>
+                  </div>
+                <div class="pt-3 pb-2 mb-3" id="deleteUser">
+                    <h1 class="h2 border-bottom pb-2 mb-3">Borrar usuario</h1>
+                    <form class="m-2 p-2" method="POST" action="/deleteUser">
+                        <div class="container-fluid">
+                          <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Introducir id del usuario a borrar" name="idU" required>
+                            <div class="input-group-append">
+                              <button class="btn btn-danger" type="submit">
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
+                          <% if (errRemove!==null && errRemove===true){%>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                El id introducido no existe. Inténtelo de nuevo.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                          <%} else if (errRemove===false){%>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                Usuario eliminado correctamente.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                          <%}%>
+                        </div>
+                    </form>
+                </div>
+                <div class="pt-3 pb-2 mb-3" id="managesupervisors">
+                    <h1 class="h2 border-bottom pb-2 mb-3">Gestionar supervisores de examenes</h1>
+                        <div class="container-fluid">
+                          <div class="input-group mb-3">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-sm">
+                                  <thead>
+                                    <tr>
+                                      <th>id</th>
+                                      <th>Start_date</th>
+                                      <th>End_date</th>
+                                      <th>Examen</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <%if(eventos!==null && eventos!==undefined){%>
+                                      <%eventos.forEach(event => { %>
+                                        <tr>
+                                            <td><%=event.id%></td>
+                                            <td><%=event.start_date%></td>
+                                            <td><%=event.end_date%></td>
+                                            <td><%=event.text%></td>
+                                        </tr>
+                                      <%});%>
+                                  </tbody>
+                                </table>
+                              </div>
+                            <form method="POST" action="/manageSupervisorsExams">
+                              <div class="row p-2 m-2">
+                                  <div class="col-4 m-1">
+                                      <label for="inputidT">Id del profesor</label>
+                                      <input type="text" class="form-control" placeholder="Introducir id del profesor" name="idT" required>
+                                  </div>
+                                  <div class="col-4 m-1">
+                                      <label for="inputidE">Id del evento</label>
+                                      <input type="text" class="form-control" placeholder="Introducir id del evento" name="idE" required>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-8 m-1">
+                                      <button class="btn btn-success" type="submit">
+                                          Añadir supervisor
+                                      </button>
+                                  </div>
+                              </div>
+                              
+                              <% if (errSupervisor!==null && errSupervisor===true){%>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    El profesor ya tiene que supervisar ese examen. Inténtelo de nuevo.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                              <%}else if (errSupervisor===false){%>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    El profesor ya puede supervisar ese examen!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div> 
+                              <%}%>
+                          </form>
+                            <%}else{%>
+                              <div class="alert alert-warning" role="alert" >
+                                  <h4 class="alert-heading">Aviso!</h4>
+                                  <p>No hay ningún examen programado aún para añadir supervisores</p>
+                                  <hr>
+                                  <p class="mb-0">Para más información contacte con el administrador.</p>
+                              </div>
+                            <%}%>
+                      </div>
+                    </div>
+                  </div>          
+              </main>
+            </div>
+        </div>
+        
+      <!-- Footer -->
+      <footer class="page-footer font-small bg-light w-100">
+          <!-- Copyright -->
+          <div class="footer-copyright text-center py-3">
+            Página administración sistema
+          </div>
+          <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+      <!-- SCRIPTS -->
+      <!-- JQuery -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <!-- Custom JavaScript -->
+      <script type="text/javascript" src="js/backtotop.js"></script>
+      <script src="https://unpkg.com/feather-icons"></script>
+      <script>
+          feather.replace()
+      </script>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+body {
+    font-family: sans-serif;
+  }
+nav {
+    background-color: #B71234;
+}
+img {
+  height: 42px;
+  margin: 4px;
+}
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    /*float:left;*/
+  }
+
+legend.over {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
+
+  #drop-area.highlight {
+    border-color: #B71234;
+  }
+  p {
+    margin-top: 0;
+  }
+  .my-form {
+    margin-bottom: 10px;
+  }
+  #gallery {
+    margin-top: 10px;
+  }
+  #gallery img {
+    width: 50px;
+    vertical-align: middle;
+  }
+  .button {
+    display: inline-block;
+    padding: 10px;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .button:hover {
+    background: #ddd;
+  }
+  #fileElem {
+    display: none;
+  }
+  #aniadir{
+  margin-top:70px;
+  display: inline-block;
+  border-radius: 8px;
+  margin-left: 10px;
+  }
+
+  #pdf{
+  float:right !important;
+  width:50%;
+  }
+ 

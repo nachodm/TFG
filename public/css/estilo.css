@@ -1,0 +1,39 @@
+.titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #b71234;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.info{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.fondo{
+    background-color: #C8C8D1;
+}
+
+
+div {
+   /* border: 1px solid black;*/
+    text-align: center;
+  }
+
+.alumnos{
+    font-size: 15px;
+    font-weight: bold;
+    color: #9B8942;
+  }
+
+.al:hover{
+    color: #b71234;
+}
+  .al{
+      text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: #9B8942;
+    background-color:transparent
+  }
