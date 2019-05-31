@@ -70,19 +70,6 @@ CREATE TABLE `asiento` (
   `id_alumno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `asiento`
---
-
-INSERT INTO `asiento` (`id`, `id_aula`, `id_alumno`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(6, 1, 4),
-(7, 1, 5),
-(4, 1, 13),
-(5, 1, 14);
-
 -- --------------------------------------------------------
 
 --
@@ -219,23 +206,6 @@ CREATE TABLE `entrega` (
   `hora` date NOT NULL,
   `entregado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `entrega`
---
-
-INSERT INTO `entrega` (`id`, `id_asiento`, `hora`, `entregado`) VALUES
-(3, 2, '2019-05-28', 0),
-(8, 6, '0000-00-00', 0),
-(9, 6, '2019-05-28', 0),
-(11, 6, '2019-05-28', 1),
-(12, 6, '2019-05-28', 0),
-(13, 6, '2019-05-28', 1),
-(14, 6, '2019-05-28', 1),
-(15, 6, '2019-05-28', 1),
-(16, 4, '2019-05-28', 0),
-(17, 2, '2019-05-28', 0),
-(18, 7, '2019-05-28', 0);
 
 -- --------------------------------------------------------
 
