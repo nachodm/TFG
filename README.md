@@ -7,6 +7,9 @@ Esta aplicación se encuentra bajo la licencia GNU GPL.
 
 Para la ejecución de esta aplicación en el entorno local, es necesario el uso de comandos para instalar las dependencias necesarias (npm install), así como tener instalado Node.js.
 
+
+### Autores y citaciones
+
 Autores: Ignacio Domingo Martín, Julia Fernández Reyes, Ágata Sánchez Andreu
 
 Director: Simon Pickin
