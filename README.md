@@ -6,3 +6,5 @@ El presente TFG ha sido realizado por tres alumnos especializados en el Grado de
 Esta aplicación se encuentra bajo la licencia GNU GPL.
 
 Autores: Ignacio Domingo Martín, Julia Fernández Reyes, Ágata Sánchez Andreu
+
+Director: Simon Pickin
