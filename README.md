@@ -5,6 +5,8 @@ El presente TFG ha sido realizado por tres alumnos especializados en el Grado de
 
 Esta aplicación se encuentra bajo la licencia GNU GPL.
 
+Para la ejecución de esta aplicación en el entorno local, es necesario el uso de comandos para instalar las dependencias necesarias (npm install), así como tener instalado Node.js.
+
 Autores: Ignacio Domingo Martín, Julia Fernández Reyes, Ágata Sánchez Andreu
 
 Director: Simon Pickin
