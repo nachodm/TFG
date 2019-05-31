@@ -72,7 +72,7 @@ app.post("/isUserCorrect", (request, response) => {
     teachers.isUserCorrect(request.body.user, request.body.pass, (err, user) => {
         if (err) {
             request.session.error = err;
-            next(err); 
+            response.status(500).send('Error 500: Internal server error');
         }
         else if (user === undefined){
             response.session.error = "Usuario y/o contraseña incorrecta";
@@ -144,7 +144,7 @@ app.get("/examen", (request, response) => {
     else {
         examenes.getRoomExam(request.session.loggedUser.id_profesor, (err,room)=>{
             if (err) {
-                next(err); 
+                response.status(500).send('Error 500: Internal server error');
             }else{
                 if(room!==null){
                     request.session.aula={ nombreA:room[0].nombre, id_grupo:room[0].id_grupo, id_aula:room[0].id_aula, id_asignatura:room[0].id_asignatura};
@@ -155,32 +155,40 @@ app.get("/examen", (request, response) => {
                                 response.render("hall", {students:request.session.students, aula:request.session.aula, full: request.session.full, finished: request.session.finished});
                             }
                             else {
-                                next(err); 
+                                response.status(500).send('Error 500: Internal server error');
                             }
                         }
                         else {
                             examenes.getStudent(request.session.students, (err,student)=>{
-                                if(err){
+                                if (err) {
                                     if (err === "full") {
                                         request.session.full = true;
                                         response.render("hall", {students:request.session.students, aula:request.session.aula, full: request.session.full, finished: request.session.finished});
                                     }
                                     else {
-                                        response.redirect("PerfilExamen");
+                                        response.status(500).send('Error 500: Internal server error');
                                     }
-                                }else{
-                                    if (student) {
-                                        request.session.seats.push(result.puesto);
-                                        student.puesto = result.puesto;
-                                        student.ruta = result.ruta;
-                                        request.session.students.push(student);
-                                    }
-                                    response.render("hall", {students:request.session.students, aula:request.session.aula, full: request.session.full, finished: request.session.finished});
+                                } else {
+                                    examenes.sitStudent(student.id, request.session.aula.id_aula, result.puesto, (err, success) => {
+                                        if (err) {
+                                            response.status(500).send('Error 500: Internal server error');
+                                        }
+                                        else {
+                                            if (student) {
+                                                request.session.seats.push(result.puesto);
+                                                student.puesto = result.puesto;
+                                                student.ruta = result.ruta;
+                                                request.session.students.push(student);
+                                            }
+                                            response.render("hall", {students:request.session.students, aula:request.session.aula, full: request.session.full, finished: request.session.finished});
+                                      
+                                        }
+                                    })  
                                 }
                             });
                         }
                     })
-                }else{
+                } else{
                     response.redirect("PerfilExamen");
                 }
             }
@@ -270,7 +278,7 @@ app.get("/adminusers", (request, response) => {
 app.post("/searchUser", (request,response) => {
     admin.search(request.body.search, (err, result) => {
         if (err) {
-            next(err); 
+            response.status(500).send('Error 500: Internal server error');
         } else {
             if (result.length !== 0) {
                 request.session.credentials = result;
@@ -293,7 +301,7 @@ app.post("/addUser", (request, response) => {
             };
             admin.addUser(user, (err, result) => {
                 if(err) {
-                    next(err); 
+                    response.status(500).send('Error 500: Internal server error');
                 }
                 else {
                     if(result) {
@@ -358,7 +366,7 @@ app.post('/uploadexams', upload.array('examen', 12), (request, response) => {
 app.post("/eliminarExamen", (request,response)=>{
     examenes.removeExamFromBBDD(request.body.ex, (err,exito)=>{
         if (err) {
-            next(err); 
+            response.status(500).send('Error 500: Internal server error');
         } else {
             if (exito) {
                 response.redirect("PerfilExamen");
@@ -378,7 +386,7 @@ app.post("/grantCredentials", (request,response)=>{
     };
     admin.checkCredentials(user, (err, exists) => {
         if (err) {
-            next(err); 
+            response.status(500).send('Error 500: Internal server error');
         }
         else {
             if (!exists) {
@@ -405,7 +413,7 @@ app.post("/manageSupervisorsExams", (request,response)=>{
     let idE=request.body.idE;
     admin.addSupervisor(idP,idE, (err,exito)=>{
         if(err){
-            next(err); 
+            response.status(500).send('Error 500: Internal server error');
         }else{
             if(exito){
                 request.session.errorSupervisor = false;
@@ -446,7 +454,7 @@ app.post("/handExam", (request,response)=>{
                 response.redirect("Examen");
             }
             else {
-                next(err);
+                response.status(500).send('Error 500: Internal server error');
             }
         }
     });
@@ -456,7 +464,7 @@ app.post("/handExam", (request,response)=>{
 app.post("/deleteWarnings", (request,response)=>{
     teachers.deleteWarnings(request.session.loggedUser.id_profesor, (err)=>{
         if(err){
-            next(err);
+            response.status(500).send('Error 500: Internal server error');
         }else{
             response.redirect("PerfilExamen");
         }
@@ -475,7 +483,6 @@ app.post("/sendWarning", (request,response)=>{
             if(id!==null){
                 examenes.getStudentName(idA,(err,name)=>{
                     if(err){
-                        
                         response.redirect("Examen");
                     }else{
                         examenes.getSubjectName(idAs, (err,subject) => {
@@ -509,7 +516,23 @@ app.post("/finalize", (request,response)=>{
         if(err){
             response.redirect("Examen");
         }else{
-            response.redirect("Examen");
+            request.session.finished++;
+            let i = 0, found = false;
+            do {
+                if (request.session.students[i].id == e) {
+                    request.session.students.splice(i, 1); 
+                    found = true;
+                }
+                else {
+                    i++;
+                }
+            } while (!found);
+            if (found) {
+                response.redirect("Examen");
+            }
+            else {
+                response.status(500).send('Error 500: Internal server error');
+            }
         }
     });
 });
@@ -528,7 +551,3 @@ app.use((request, response, next) => {    // Código 404: enlace roto.
     response.status(404);     
     response.render("error", {error:"404", url: request.url });
 }); 
-app.use(function(error, request, response, next) {    // Código 500: Internal server error.  
-    response.status(500);    
-    response.render("error", {error:"500",  url:request.url}); 
-});

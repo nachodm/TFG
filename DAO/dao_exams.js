@@ -268,6 +268,22 @@ class DAOExams {
             }
         })
     }
+
+    sitStudent(student, hall, seat, callback){
+        this.pool.getConnection((err,connection)=>{
+            if(err) {
+                callback(err);
+            } else {
+                connection.query("INSERT INTO asiento(id, id_aula, id_alumno) VALUES(?,?,?)", [seat, hall, student] , (err, row)=>{
+                    if(err){
+                        callback(err);
+                    }else{
+                        callback (null);
+                    }
+                });
+            }
+        })
+    } 
     sendWarning(idA, idP, aviso, callback){
         this.pool.getConnection((err,connection)=>{
             if(err){
