@@ -78,9 +78,9 @@ class DAOAdmin {
     }
 
     /**
-     * 
-     * @param {*} id 
-     * @param {*} callback 
+     * Borra al usuario cuyo id recibe por parámetro de la base de datos
+     * @param {Number} id Identificador del usuario que se va a borrar 
+     * @param {Function} callback Función con el objeto error y el resultado
      */
     removeUser(id, callback){
         this.pool.getConnection((err,connection)=>{
@@ -110,9 +110,9 @@ class DAOAdmin {
     }
 
     /**
-     * 
-     * @param {Object} user 
-     * @param {Function} callback 
+     * Comprueba si el usuario que recibe por parámetro ya posee credenciales de acceso y devuelve un booleano con el resultado.
+     * @param {Object} user Usuario cuyos credenciales se van a comprobar
+     * @param {Function} callback Función con el objeto error y el resultado
      */
     checkCredentials(user, callback) {
         this.pool.getConnection((err, connection) => {
@@ -139,9 +139,9 @@ class DAOAdmin {
     }
 
     /**
-     * 
-     * @param {Object} user 
-     * @param {Function} callback 
+     * Otorga a un usuario credenciales de acceso a la base de datos mediante su inserción en la tabla "conectar"
+     * @param {Object} user Objeto con los nuevos credenciales de acceso del usuario
+     * @param {Function} callback Función con el objeto error y el resultado
      */
     grantCredentials(user, callback) {
         this.pool.getConnection((err, connection) => {
