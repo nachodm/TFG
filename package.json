@@ -20,6 +20,6 @@
     "multer": "^1.4.1",
     "mysql": "^2.16.0",
     "node-native-printer": "^1.0.0-beta.5",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
