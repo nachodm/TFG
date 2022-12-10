@@ -13,7 +13,7 @@
     "cookie-parser": "^1.4.4",
     "date-format-lite": "^17.7.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-fileupload": "^1.1.4",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
